@@ -40,7 +40,6 @@ export class PhraseAnalyzer {
                 }
             }
         }
-        return keys;
     }
 
     private findDepth(tree: TreeNode, word: string, depth: number = 0): number | null {
@@ -85,6 +84,36 @@ export class PhraseAnalyzer {
                 }
             }
         });
+
+        return result;
+    }
+
+    public newAnalyze(phrase: string, targetDepth: number): { [key: string]: number } {
+        // Separa a frase em palavras usando espaços em branco
+        const arrayKeys = this.getKeysByLevel(this.hierarchy, targetDepth)
+
+        const words = phrase.split(/\s+/);
+        const result: { [key: string]: number } = {};
+
+        for (let key of arrayKeys) {
+            // Não vai achar!
+            const obj = this.hierarchy[key]
+
+            words.forEach(word => {
+                const hasWord = this.findWordAtLevelTree(obj, word);
+                // Há depth e a palavra está no dept procurado
+                if (hasWord) {
+                    // Contagem de palavras
+                    if (result[key]) {
+                        // Já encontrada
+                        result[key] += 1;
+                    } else {
+                        // Primeira vez
+                        result[key] = 1;
+                    }
+                }
+            });
+        }
 
         return result;
     }
