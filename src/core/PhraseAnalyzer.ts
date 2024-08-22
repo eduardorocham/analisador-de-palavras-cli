@@ -7,56 +7,55 @@ export class PhraseAnalyzer {
         this.hierarchy = hierarchy;
     }
 
-    private findWordAtLevelTree(tree: TreeNode, word: string): boolean {
-        const lowerCaseWord = word.toLowerCase();
-        for (const key in tree) {
-            // const lowerCaseKey = key.toLowerCase();
-
-            if (Array.isArray(tree[key]) && tree[key].some(item => item.toLowerCase() === lowerCaseWord)) {
-                return true;
-            }
-
-            if (typeof tree[key] === 'object') {
-                const result = this.findWordAtLevelTree(tree[key] as TreeNode, word);
-                if (result !== null) {
+    private isWordInTreeAtAnyLevel(node: TreeNode | string[], searchWord: string): boolean {
+        const lowerCaseWord = searchWord.toLowerCase();
+        if (Array.isArray(node)) {
+            return node.some(item => item.toLowerCase() === lowerCaseWord);
+        }
+    
+        if (typeof node === 'object') {
+            for (const key in node) {
+                const result = this.isWordInTreeAtAnyLevel(node[key] as TreeNode, searchWord);
+                if (result) {
                     return true;
                 }
             }
         }
         return false;
-    }
-
-    private getKeysByLevel(tree: TreeNode, level: number): [] | string[] {
-        if (level === 0) {
-            return Object.keys(tree);
+    } 
+    
+    private getSubtreeAtLevel(node: TreeNode, targetLevel: number): TreeNode {
+        // Descer na árvore até atingir o nível desejado
+        if (targetLevel === 1) {
+            return node; // Retornar o conteúdo inteiro do nível desejado
         }
-
-        const keys: string[] = [];
-        for (const key in tree) {
-            if (typeof tree[key] === 'object') {
-                const subKeys = this.getKeysByLevel(tree[key] as TreeNode, level - 1);
-                if (subKeys.length > 0) {
-                    keys.push(...subKeys);
-                }
+    
+        const subtree: TreeNode = {};
+        for (const key in node) {
+            if (typeof node[key] === 'object') {
+                // Continuar descendo até o nível desejado
+                const subNode = this.getSubtreeAtLevel(node[key] as TreeNode, targetLevel - 1);
+                Object.assign(subtree, subNode);
             }
         }
+        return subtree;
     }
 
-    private findDepth(tree: TreeNode, word: string, depth: number = 0): number | null {
-        const lowerCaseWord = word.toLowerCase();
+    private findWordDepth(node: TreeNode, searchWord: string, depth: number = 0): number | null {
+        const lowerCaseWord = searchWord.toLowerCase();
 
-        for (const key in tree) {
+        for (const key in node) {
             const lowerCaseKey = key.toLowerCase();
 
             // Se é uma chave ou palavra do array de uma chave existente, retorna a o depth
             if (lowerCaseKey === lowerCaseWord ||
-                (Array.isArray(tree[key]) && tree[key].some(item => item.toLowerCase() === lowerCaseWord))) {
+                (Array.isArray(node[key]) && node[key].some(item => item.toLowerCase() === lowerCaseWord))) {
                 return depth;
             }
 
             // Verificação de subárvores
-            if (typeof tree[key] === 'object') {
-                const result = this.findDepth(tree[key] as TreeNode, word, depth + 1);
+            if (typeof node[key] === 'object') {
+                const result = this.findWordDepth(node[key] as TreeNode, searchWord, depth + 1);
                 if (result !== null) {
                     return result;
                 }
@@ -65,56 +64,33 @@ export class PhraseAnalyzer {
         return null;
     }
 
-    public analyze(phrase: string, targetDepth: number): { [key: string]: number } {
+    public analyze(phrase: string, targetDepth: number): string {
+        const subtreeAtLevel = this.getSubtreeAtLevel(this.hierarchy, targetDepth)
+
         // Separa a frase em palavras usando espaços em branco
         const words = phrase.split(/\s+/);
-        const result: { [key: string]: number } = {};
+        const levelWordCount: { [key: string]: number } = {};
 
-        words.forEach(word => {
-            const depth = this.findDepth(this.hierarchy, word);
-            // Há depth e a palavra está no dept procurado
-            if (depth !== null && depth === targetDepth) {
-                // Contagem de palavras
-                if (result[word]) {
-                    // Já encontrada
-                    result[word] += 1;
-                } else {
-                    // Primeira vez
-                    result[word] = 1;
-                }
-            }
-        });
-
-        return result;
-    }
-
-    public newAnalyze(phrase: string, targetDepth: number): { [key: string]: number } {
-        // Separa a frase em palavras usando espaços em branco
-        const arrayKeys = this.getKeysByLevel(this.hierarchy, targetDepth)
-
-        const words = phrase.split(/\s+/);
-        const result: { [key: string]: number } = {};
-
-        for (let key of arrayKeys) {
-            // Não vai achar!
-            const obj = this.hierarchy[key]
-
+        for (let key in subtreeAtLevel) {
             words.forEach(word => {
-                const hasWord = this.findWordAtLevelTree(obj, word);
-                // Há depth e a palavra está no dept procurado
+                const hasWord = this.isWordInTreeAtAnyLevel(subtreeAtLevel[key], word);
                 if (hasWord) {
                     // Contagem de palavras
-                    if (result[key]) {
+                    if (levelWordCount[key]) {
                         // Já encontrada
-                        result[key] += 1;
+                        levelWordCount[key] += 1;
                     } else {
                         // Primeira vez
-                        result[key] = 1;
+                        levelWordCount[key] = 1;
                     }
                 }
             });
         }
 
-        return result;
+        const outputString = Object.entries(levelWordCount)
+            .map(([key, value]) => `${key} = ${value}`)
+            .join('; ') + ';';
+
+        return outputString;
     }
 }
