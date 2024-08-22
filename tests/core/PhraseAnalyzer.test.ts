@@ -19,17 +19,17 @@ describe('Testes dos métodos da classe PhraseAnalyzer', () => {
         phraseAnalyzer = new PhraseAnalyzer(hierarchy);
     });
 
-    test('Deve encontrar uma correspondência no nível de especifidade buscado', () => {
+    it('Deve encontrar uma correspondência no nível de especifidade buscado', () => {
         const result = phraseAnalyzer.analyze('Eu amo papagaios', 2);
         expect(result).toBe('Aves = 1;');
     });
 
-    test('Deve encontrar duas correspondências no nível de especifidade buscado', () => {
+    it('Deve encontrar duas correspondências no nível de especifidade buscado', () => {
         const result = phraseAnalyzer.analyze('Eu vi leões e canários', 3);
         expect(result).toBe('Felinos = 1; Pássaros = 1;');
     });
 
-    test('Deve retornar um resultado vazio quando nenhuma palavra for encontrada em nenhum nível', () => {
+    it('Deve retornar um resultado vazio quando nenhuma palavra for encontrada em nenhum nível', () => {
         const result = phraseAnalyzer.analyze('Eu gosto de sorvete', 2);
         expect(result).toBe('');
     });
