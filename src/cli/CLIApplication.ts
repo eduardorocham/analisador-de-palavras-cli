@@ -29,7 +29,7 @@ export class CLIApplication {
                 const result = this.analyzer.analyze(phrase, options.depth);
                 const analyzeTime = Date.now() - startAnalyze;
 
-                console.log('Analysis result:', result);
+                console.log(result);
 
                 if (options.verbose) {
                     console.table([

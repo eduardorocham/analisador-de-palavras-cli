@@ -12,7 +12,7 @@ export class PhraseAnalyzer {
         if (Array.isArray(node)) {
             return node.some(item => item.toLowerCase() === lowerCaseWord);
         }
-    
+
         if (typeof node === 'object') {
             for (const key in node) {
                 const result = this.isWordInTreeAtAnyLevel(node[key] as TreeNode, searchWord);
@@ -22,14 +22,14 @@ export class PhraseAnalyzer {
             }
         }
         return false;
-    } 
-    
+    }
+
     private getSubtreeAtLevel(node: TreeNode, targetLevel: number): TreeNode {
         // Descer na árvore até atingir o nível desejado
         if (targetLevel === 1) {
             return node; // Retornar o conteúdo inteiro do nível desejado
         }
-    
+
         const subtree: TreeNode = {};
         for (const key in node) {
             if (typeof node[key] === 'object') {
@@ -87,9 +87,15 @@ export class PhraseAnalyzer {
             });
         }
 
-        const outputString = Object.entries(levelWordCount)
-            .map(([key, value]) => `${key} = ${value}`)
-            .join('; ') + ';';
+        let outputString;
+
+        if (Object.entries(levelWordCount).length > 0) {
+            outputString = Object.entries(levelWordCount)
+                .map(([key, value]) => `${key} = ${value}`)
+                .join('; ');
+        } else {
+            outputString = `Na frase não existe nenhum filho do nível ${targetDepth} e nem o nível ${targetDepth} possui os termos especificados`
+        }
 
         return outputString;
     }

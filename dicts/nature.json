@@ -1,0 +1,90 @@
+{
+  "Natureza": {
+    "Animais": {
+      "Mamíferos": {
+        "Carnívoros": {
+          "Felinos": ["Leões", "Tigres", "Jaguares", "Leopardos", "Guepardos", "Pumas"],
+          "Canídeos": ["Lobos", "Raposas", "Cães", "Chacais"],
+          "Ursídeos": ["Ursos", "Pandas"]
+        },
+        "Herbívoros": {
+          "Equídeos": ["Cavalos", "Zebras", "Asnos"],
+          "Bovídeos": ["Bois", "Búfalos", "Antílopes", "Cabras", "Ovelhas"],
+          "Roedores": ["Ratos", "Esquilos", "Castores", "Capivaras"]
+        },
+        "Onívoros": {
+          "Suínos": ["Porcos", "Javalis"],
+          "Ursídeos": ["Ursos"]
+        },
+        "Primatas": ["Gorilas", "Chimpanzés", "Orangotangos", "Bonobos", "Macacos"],
+        "Cetáceos": ["Baleias", "Golfinhos", "Narvais", "Orcas"]
+      },
+      "Aves": {
+        "Rapinas": ["Águias", "Falcões", "Corujas", "Milhafres", "Gaviões"],
+        "Pássaros": ["Canários", "Papagaios", "Pardais", "Rouxinóis", "Andorinhas"],
+        "Aquáticas": ["Patos", "Gansos", "Cisnes", "Pelicanos"],
+        "Corvídeos": ["Corvos", "Gralhas", "Pega"]
+      },
+      "Répteis": {
+        "Crocodilianos": ["Crocodilos", "Jacarés"],
+        "Lagartos": ["Camaleões", "Iguanas", "Varanos"],
+        "Serpentes": ["Cobras", "Jararacas", "Pítons", "Corais"],
+        "Quelônios": ["Tartarugas", "Cágados", "Jabutis"]
+      },
+      "Anfíbios": {
+        "Rãs": ["Rãs", "Pererecas"],
+        "Sapos": ["Sapos", "Cururus"],
+        "Salamandras": ["Salamandras", "Tritões"],
+        "Cecílias": ["Cecílias"]
+      },
+      "Peixes": {
+        "Cartilaginosos": ["Tubaroes", "Raias"],
+        "Ósseos": ["Salmões", "Atuns", "Badejos", "Carpas"],
+        "Ciclídeos": ["Tilápias", "Acarás"]
+      },
+      "Invertebrados": {
+        "Insetos": {
+          "Coleópteros": ["Besouros", "Joaninhas"],
+          "Lepidópteros": ["Borboletas", "Mariposas"]
+        },
+        "Aracnídeos": ["Aranhas", "Escorpiões"],
+        "Crustáceos": ["Caranguejos", "Lagostas", "Camarões"],
+        "Moluscos": ["Polvos", "Lulas", "Caracóis"]
+      }
+    },
+    "Plantas": {
+      "Árvores": {
+        "Coníferas": ["Pinheiros", "Cedros", "Abetos"],
+        "Decíduas": ["Carvalhos", "Maples", "Bétulas"]
+      },
+      "Flores": {
+        "Ornamentais": ["Rosas", "Tulipas", "Girassóis"],
+        "Silvestres": ["Margaridas", "Papoulas", "Violetas"]
+      },
+      "Gramíneas": ["Trigo", "Cevada", "Milho", "Arroz"]
+    }
+  },
+  "Objetos": {
+    "Veículos": {
+      "Terrestres": ["Carros", "Caminhões", "Motos", "Ônibus", "Bicicletas"],
+      "Aquáticos": ["Barcos", "Navios", "Submarinos", "Canoas"],
+      "Aéreos": ["Aviões", "Helicópteros", "Planadores", "Dirigíveis"]
+    },
+    "Eletrodomésticos": ["Geladeiras", "Fogões", "Máquinas de Lavar", "Microondas"],
+    "Móveis": ["Camas", "Sofás", "Mesas", "Cadeiras", "Estantes"],
+    "Ferramentas": ["Martelos", "Chaves de Fenda", "Serras", "Alicates"]
+  },
+  "Profissões": {
+    "Saúde": ["Médicos", "Enfermeiros", "Dentistas", "Fisioterapeutas"],
+    "Educação": ["Professores", "Pesquisadores", "Bibliotecários"],
+    "Engenharia": ["Engenheiros Civis", "Engenheiros Mecânicos", "Engenheiros de Software"],
+    "Artes": ["Artistas Plásticos", "Músicos", "Atores", "Escritores"]
+  },
+  "Tecnologia": {
+    "Computadores": ["Laptops", "Desktops", "Servidores", "Tablets"],
+    "Telecomunicações": ["Smartphones", "Modems", "Roteadores", "Antenas"],
+    "Componentes": ["Processadores", "Memórias RAM", "Discos Rígidos", "Placas de Vídeo"],
+    "Software": ["Sistemas Operacionais", "Aplicativos", "Jogos", "Banco de Dados"]
+  }
+}
+  
