@@ -16,10 +16,10 @@ export class CLIApplication {
 
         program
             .command('analyze')
-            .description('Analyze a phrase and count words at a specific depth')
-            .option('--depth <n>', 'Depth level to analyze', parseInt)
-            .option('--verbose', 'Display detailed metrics')
-            .argument('<phrase>', 'Phrase to analyze')
+            .description('Analisa uma frase e conta palavras em um nível de profundidade específico')
+            .option('--depth <n>', 'Nível de profundiade', parseInt)
+            .option('--verbose', 'Exibe métricas de tempo')
+            .argument('<phrase>', 'Frase para analisar')
             .action((phrase, options) => {
                 const loadTime = this.hierarchyLoader.getLoadTime()
 
