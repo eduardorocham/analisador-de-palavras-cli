@@ -1,5 +1,4 @@
 import { Command } from 'commander';
-import * as path from 'path';
 import { HierarchyLoader } from '../core/HierarchyLoader';
 import { PhraseAnalyzer } from '../core/PhraseAnalyzer';
 
@@ -33,16 +32,13 @@ export class CLIApplication {
                 console.log('Analysis result:', result);
 
                 if (options.verbose) {
-                    console.log(`Tempo de carregamento dos parâmetros: ${loadTime}ms`);
-                    console.log(`Tempo de verificação da frase: ${analyzeTime}ms`);
+                    console.table([
+                        { Metric: 'Tempo de carregamento dos parâmetros', Time: `${loadTime}ms` },
+                        { Metric: 'Tempo de verificação da frase', Time: `${analyzeTime}ms` }
+                    ]);
                 }
             });
 
         program.parse(process.argv);
     }
 }
-
-// Definindo o caminho para o arquivo JSON e inicializando a aplicação
-const hierarchyPath = path.join(__dirname, '../../dicts/animals.json');
-const app = new CLIApplication(hierarchyPath);
-app.run();
