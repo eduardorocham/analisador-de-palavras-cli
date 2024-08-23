@@ -21,9 +21,7 @@ export class CLIApplication {
             .option('--verbose', 'Display detailed metrics')
             .argument('<phrase>', 'Phrase to analyze')
             .action((phrase, options) => {
-                const startLoad = Date.now();
-                const hierarchy = this.hierarchyLoader.getHierarchy();
-                const loadTime = Date.now() - startLoad;
+                const loadTime = this.hierarchyLoader.getLoadTime()
 
                 const startAnalyze = Date.now();
                 const result = this.analyzer.analyze(phrase, options.depth);
