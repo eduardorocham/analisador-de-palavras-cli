@@ -1,0 +1,61 @@
+# Analisador de Hierarquia de Palavras
+
+## Introdução
+
+## Requisitos
+
+1. **[Bun](https://bun.sh/)**
+
+   A aplicação CLI utiliza o bun para rodar, você pode baixá-lo na sua máquina local no prórpio ([site oficial](https://bun.sh/)) de acordo com o seu sistema operacional:
+
+2. **Node**
+
+   Você também precisará do Node instalado na sua máquina local. Você pode baixar o Node.js a partir de ([https://nodejs.org/](https://nodejs.org/en/download/package-manager/current))
+
+## Instalação e Uso
+
+Para executar a aplicação, siga os passos abaixo:
+
+1. **Clone o repositório:**
+
+```bash
+  git clone https://github.com/seu-usuario/analisador-de-palavras-cli.git
+```
+
+2. **Instale as dependências:**
+
+```bash
+  npm install
+```
+
+3. **Execute a aplicação:**
+   Para rodar a aplicação e usar a CLI, você pode utilizar o seguinte comando:
+
+```bash
+  bun run cli.ts analyze –depth <n> –verbose (optional) “{phrase}”
+```
+
+- `<phrase>`: A frase que você deseja analisar.
+- `--depth <n>`: O nível da hierarquia a ser analisado.
+- `--verbose`: (Opcional) Exibe métricas detalhadas sobre o tempo de carregamento e análise.
+
+Exemplo:
+
+```bash
+    bun run cli.ts analyze –depth 2 –verbose "Eu amo papagaios"
+```
+
+## Estrutura do Projeto
+
+O projeto é organizado da seguinte forma:
+
+- **dicts/**: Pasta contendo arquivos JSON que representam as árvores de palavras. Cada arquivo JSON descreve uma estrutura hierárquica onde palavras e suas relações são organizadas.
+- **src/**
+  - **cli/**: Contém a implementação da interface de linha de comando (CLI) para interagir com a aplicação.
+    - `CLIApplication.ts`: Classe responsável pela configuração e execução dos comandos da CLI.
+  - **core/**: Contém a lógica central para carregar hierarquias e analisar frases.
+    - `HierarchyLoader.ts`: Classe responsável por carregar hierarquias a partir de arquivos JSON.
+    - `PhraseAnalyzer.ts`: Classe responsável por analisar frases e contar palavras em níveis específicos da hierarquia.
+    - `TreeNode.ts`: Definição do tipo para os nós da árvore de palavras.
+
+## Testes
