@@ -4,9 +4,12 @@ import { TreeNode } from './TreeNode';
 
 export class HierarchyLoader {
     private hierarchy: TreeNode;
+    private loadTime: number;
 
     constructor(filePath: string) {
+        const startLoad = Date.now();
         this.hierarchy = this.loadHierarchy(filePath);
+        this.loadTime = Date.now() - startLoad;
     }
 
     // Converte a string JSON para um objeto javascript real
@@ -17,5 +20,9 @@ export class HierarchyLoader {
 
     public getHierarchy(): TreeNode {
         return this.hierarchy;
+    }
+
+    public getLoadTime(): number {
+        return this.loadTime;
     }
 }
